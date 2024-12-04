@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.system.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.example.system.entity.User">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="age" property="age"/>
+        <result column="gender" property="gender"/>
+        <result column="email" property="email"/>
+        <result column="phone_number" property="phoneNumber"/>
+        <result column="location" property="location"/>
+        <result column="id_card_info" property="idCardInfo"/>
+        <result column="login_status" property="loginStatus"/>
+        <result column="logged_devices" property="loggedDevices"/>
+        <result column="user_type" property="userType"/>
+        <result column="interests" property="interests"/>
+        <result column="avatar_url" property="avatarUrl"/>
+        <result column="is_deleted" property="isDeleted"/>
+    </resultMap>
+    <insert id="insertBatch">
+        insert into user(id,username,password,
+        age,gender,email,
+        phone_number,location,id_card_info,
+        login_status,logged_devices,user_type,
+        interests,avatar_url,is_deleted)
+        values
+        <foreach collection="userCollection" item="item" separator=",">
+            (#{item.id,jdbcType=NUMERIC},#{item.username,jdbcType=VARCHAR},#{item.password,jdbcType=VARCHAR},
+            #{item.age,jdbcType=NUMERIC},#{item.gender,jdbcType=VARCHAR},#{item.email,jdbcType=VARCHAR},
+            #{item.phoneNumber,jdbcType=VARCHAR},#{item.location,jdbcType=VARCHAR},#{item.idCardInfo,jdbcType=VARCHAR},
+            #{item.loginStatus,jdbcType=VARCHAR},#{item.loggedDevices,jdbcType=VARCHAR},#{item.userType,jdbcType=VARCHAR},
+            #{item.interests,jdbcType=VARCHAR},#{item.avatarUrl,jdbcType=VARCHAR},#{item.isDeleted,jdbcType=NUMERIC})
+        </foreach>
+    </insert>
+
+</mapper>
